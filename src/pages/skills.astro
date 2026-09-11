@@ -1,0 +1,116 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { personal } from '../data/personal';
+import { skillCategories, allSkills } from '../data/skills';
+import SkillCloud from '../components/SkillCloud.astro';
+---
+
+<Layout title="Skills | Mahlatse Ndala" description="Technical skills across quantitative finance, software engineering, data engineering, and regulatory compliance">
+  <main id="main-content">
+    <section class="section pt-32" aria-labelledby="skills-heading">
+      <div class="container-custom">
+        <header class="mb-12 max-w-3xl">
+          <h1 id="skills-heading" class="section-title">Technical Skills</h1>
+          <p class="section-subtext mt-4">Categorized expertise across quant, engineering, data, and regulatory domains</p>
+        </header>
+        
+        <!-- Summary Stats -->
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12 max-w-4xl">
+          <div class="card text-center">
+            <div class="text-3xl font-bold text-primary mb-1">{skillCategories.length}</div>
+            <div class="text-text-secondary">Skill Categories</div>
+          </div>
+          <div class="card text-center">
+            <div class="text-3xl font-bold text-primary mb-1">{allSkills.length}</div>
+            <div class="text-text-secondary">Total Skills</div>
+          </div>
+          <div class="card text-center">
+            <div class="text-3xl font-bold text-primary mb-1">{allSkills.filter(s => s.level === 'Expert').length}</div>
+            <div class="text-text-secondary">Expert Level</div>
+          </div>
+          <div class="card text-center">
+            <div class="text-3xl font-bold text-primary mb-1">{allSkills.filter(s => s.level === 'Advanced').length}</div>
+            <div class="text-text-secondary">Advanced Level</div>
+          </div>
+        </div>
+        
+        <!-- Skill Cloud -->
+        <div class="max-w-5xl">
+          <SkillCloud categories={skillCategories} />
+        </div>
+        
+        <!-- Proficiency Legend -->
+        <div class="mt-12 max-w-4xl">
+          <h2 class="text-xl font-bold text-text mb-6">Proficiency Levels</h2>
+          <div class="grid sm:grid-cols-4 gap-4">
+            <div class="card">
+              <div class="flex items-center gap-3 mb-2">
+                <div class="w-4 h-4 rounded-full bg-primary"></div>
+                <span class="font-semibold text-text">Expert</span>
+              </div>
+              <p class="text-sm text-text-secondary">Deep expertise, can architect and lead complex initiatives</p>
+            </div>
+            <div class="card">
+              <div class="flex items-center gap-3 mb-2">
+                <div class="w-4 h-4 rounded-full bg-blue-500"></div>
+                <span class="font-semibold text-text">Advanced</span>
+              </div>
+              <p class="text-sm text-text-secondary">Strong practical experience, can work independently on complex tasks</p>
+            </div>
+            <div class="card">
+              <div class="flex items-center gap-3 mb-2">
+                <div class="w-4 h-4 rounded-full bg-yellow-500"></div>
+                <span class="font-semibold text-text">Intermediate</span>
+              </div>
+              <p class="text-sm text-text-secondary">Solid working knowledge, can contribute effectively with guidance</p>
+            </div>
+            <div class="card">
+              <div class="flex items-center gap-3 mb-2">
+                <div class="w-4 h-4 rounded-full bg-green-500"></div>
+                <span class="font-semibold text-text">Beginner</span>
+              </div>
+              <p class="text-sm text-text-secondary">Foundational knowledge, actively learning and applying</p>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Learning Focus -->
+        <div class="mt-16 max-w-4xl">
+          <h2 class="text-xl font-bold text-text mb-6">Currently Learning</h2>
+          <div class="grid md:grid-cols-3 gap-6">
+            <div class="card">
+              <h3 class="font-semibold text-text mb-3">AWS & Cloud Architecture</h3>
+              <p class="text-text-secondary mb-4">AWS Certified AI Practitioner (AIF-C01) exam preparation</p>
+              <div class="flex flex-wrap gap-2">
+                <span class="skill-tag text-xs">AWS Bedrock</span>
+                <span class="skill-tag text-xs">AWS SageMaker</span>
+                <span class="skill-tag text-xs">MLOps</span>
+                <span class="skill-tag text-xs">GenAI</span>
+              </div>
+            </div>
+            <div class="card">
+              <h3 class="font-semibold text-text mb-3">Advanced Quant Methods</h3>
+              <p class="text-text-secondary mb-4">MSc Financial Engineering coursework at WorldQuant University</p>
+              <div class="flex flex-wrap gap-2">
+                <span class="skill-tag text-xs">Stochastic Calculus</span>
+                <span class="skill-tag text-xs">Advanced Portfolio Theory</span>
+                <span class="skill-tag text-xs">Alternative Data</span>
+                <span class="skill-tag text-xs">ML in Finance</span>
+              </div>
+            </div>
+            <div class="card">
+              <h3 class="font-semibold text-text mb-3">Modern Web Architecture</h3>
+              <p class="text-text-secondary mb-4">Scaling Absolute Labs products with modern tooling</p>
+              <div class="flex flex-wrap gap-2">
+                <span class="skill-tag text-xs">React Server Components</span>
+                <span class="skill-tag text-xs">Edge Computing</span>
+                <span class="skill-tag text-xs">Real-time Data</span>
+                <span class="skill-tag text-xs">Type Safety</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+</Layout>

@@ -1,0 +1,94 @@
+---
+interface Props {
+  categories: import('../data/skills').SkillCategory[];
+  activeCategory?: string;
+  onCategoryChange?: (category: string) => void;
+}
+
+const { categories, activeCategory = "All", onCategoryChange } = Astro.props;
+---
+
+<div class="skill-cloud">
+  <!-- Category filters -->
+  <div class="flex flex-wrap gap-2 mb-8" role="tablist" aria-label="Skill categories">
+    <button 
+      role="tab" 
+      aria-selected={activeCategory === "All"}
+      class={`badge ${activeCategory === "All" ? "bg-primary text-white border-primary" : "bg-bg-secondary text-text-secondary border-border hover:border-primary/30"}`}
+      onclick={onCategoryChange ? `document.dispatchEvent(new CustomEvent('skill-filter', {detail: 'All'}))` : ''}
+    >
+      All
+    </button>
+    {categories.map((cat) => (
+      <button 
+        role="tab" 
+        aria-selected={activeCategory === cat.name}
+        class={`badge ${activeCategory === cat.name ? "bg-primary text-white border-primary" : "bg-bg-secondary text-text-secondary border-border hover:border-primary/30"}`}
+        onclick={onCategoryChange ? `document.dispatchEvent(new CustomEvent('skill-filter', {detail: '${cat.name}'}))` : ''}
+      >
+        {cat.name}
+      </button>
+    ))}
+  </div>
+  
+  <!-- Skills grid -->
+  <div id="skills-container" class="space-y-8">
+    {categories.map((cat) => (
+      <div 
+        class={`skill-category transition-all duration-300 ${activeCategory !== "All" && activeCategory !== cat.name ? "hidden" : ""}`}
+        data-category={cat.name}
+      >
+        <h4 class="text-lg font-semibold text-text mb-4 flex items-center gap-2">
+          <span class="text-primary">{cat.icon === "code" && "💻" || cat.icon === "chart-bar" && "📊" || cat.icon === "database" && "🗄️" || cat.icon === "cog" && "⚙️" || cat.icon === "shield-check" && "🛡️"}</span>
+          {cat.name}
+        </h4>
+        <div class="flex flex-wrap gap-2" role="list" aria-label={`${cat.name} skills`}>
+          {cat.skills.map((skill) => (
+            <button
+              type="button"
+              class="skill-tag group relative"
+              role="listitem"
+              title={skill.source ? `Sources: ${skill.source.join(", ")}` : ""}
+            >
+              <span>{skill.name}</span>
+              {skill.level && (
+                <span class="ml-1.5 px-1.5 py-0.5 text-xs rounded-full bg-primary/10 text-primary border border-primary/20 opacity-0 group-hover:opacity-100 transition-opacity">
+                  {skill.level}
+                </span>
+              )}
+            </button>
+          ))}
+        </div>
+      </div>
+    ))}
+  </div>
+</div>
+
+<script>
+  // Handle filter events
+  document.addEventListener('skill-filter', (e: CustomEvent<string>) => {
+    const category = e.detail;
+    const containers = document.querySelectorAll('.skill-category');
+    const buttons = document.querySelectorAll('[role="tab"]');
+    
+    buttons.forEach(btn => {
+      const isActive = btn.textContent?.trim() === category;
+      btn.setAttribute('aria-selected', isActive);
+      btn.classList.toggle('bg-primary', isActive);
+      btn.classList.toggle('text-white', isActive);
+      btn.classList.toggle('border-primary', isActive);
+      btn.classList.toggle('bg-bg-secondary', !isActive);
+      btn.classList.toggle('text-text-secondary', !isActive);
+      btn.classList.toggle('border-border', !isActive);
+    });
+    
+    containers.forEach(container => {
+      const cat = container.getAttribute('data-category');
+      if (category === 'All' || cat === category) {
+        container.classList.remove('hidden');
+      } else {
+        container.classList.add('hidden');
+      }
+    });
+  });
+</script>

@@ -1,0 +1,47 @@
+---
+interface Props {
+  company: string;
+  role: string;
+  period: string;
+  description: string;
+  bullets: string[];
+  tech: string[];
+  featured?: boolean;
+}
+
+const { company, role, period, description, bullets, tech, featured } = Astro.props;
+---
+
+<article class="timeline-item card-hover group">
+  <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-4">
+    <div>
+      <div class="flex items-center gap-2 mb-1">
+        <span class="text-sm font-semibold text-primary">{period}</span>
+        {featured && <span class="badge-accent text-xs">Featured</span>}
+      </div>
+      <h3 class="text-xl font-bold text-text">{role}</h3>
+      <p class="text-text-secondary font-medium">{company}</p>
+    </div>
+  </div>
+  
+  <p class="text-text-secondary mb-4 leading-relaxed">{description}</p>
+  
+  <ul class="space-y-2 mb-4" role="list">
+    {bullets.map((bullet) => (
+      <li class="flex gap-3 text-text-secondary leading-relaxed">
+        <svg class="w-5 h-5 text-primary flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+        </svg>
+        <span>{bullet}</span>
+      </li>
+    ))}
+  </ul>
+  
+  {tech.length > 0 && (
+    <div class="flex flex-wrap gap-2" role="list" aria-label="Technologies used">
+      {tech.map((t) => (
+        <span class="skill-tag" role="listitem">{t}</span>
+      ))}
+    </div>
+  )}
+</article>

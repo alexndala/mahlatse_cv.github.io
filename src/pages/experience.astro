@@ -1,0 +1,33 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { personal } from '../data/personal';
+import { experience } from '../data/experience';
+import TimelineItem from '../components/TimelineItem.astro';
+---
+
+<Layout title="Experience | Mahlatse Ndala" description="Professional experience in quantitative finance, software engineering, and fintech">
+  <main id="main-content">
+    <section class="section pt-32" aria-labelledby="experience-heading">
+      <div class="container-custom">
+        <header class="mb-12 max-w-3xl">
+          <h1 id="experience-heading" class="section-title">Professional Experience</h1>
+          <p class="section-subtext mt-4">From institutional asset management to founding a fintech ecosystem</p>
+        </header>
+        
+        <div class="space-y-10 max-w-4xl">
+          {experience.map((exp) => (
+            <TimelineItem 
+              company={exp.company}
+              role={exp.role}
+              period={exp.period}
+              description={exp.description}
+              bullets={exp.bullets}
+              tech={exp.tech}
+              featured={exp.featured}
+            />
+          ))}
+        </div>
+      </div>
+    </section>
+  </main>
+</Layout>

@@ -1,0 +1,222 @@
+---
+interface Props {
+  title: string;
+  description?: string;
+  ogImage?: string;
+  canonicalURL?: string;
+}
+
+const {
+  title,
+  description = "Lead Multi-Asset Quantitative Analyst & Developer | Financial Data Engineering | Portfolio Construction | Fintech Founder",
+  ogImage = "/og-image.png",
+  canonicalURL = "https://alexndala.github.io",
+} = Astro.props;
+
+const pageTitle = `${title} | Mahlatse Ndala`;
+const pageDescription = description;
+const pageURL = new URL(Astro.url.pathname, canonicalURL).toString();
+const ogURL = new URL(ogImage, canonicalURL).toString();
+---
+
+<!doctype html>
+<html lang="en" class="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{pageTitle}</title>
+    <meta name="description" content={pageDescription} />
+    <link rel="canonical" href={pageURL} />
+    
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={pageURL} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={pageDescription} />
+    <meta property="og:image" content={ogURL} />
+    <meta property="og:site_name" content="Mahlatse Ndala" />
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content={pageURL} />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={pageDescription} />
+    <meta name="twitter:image" content={ogURL} />
+    
+    <!-- JSON-LD Person Schema -->
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Mahlatse Ndala",
+      "url": canonicalURL,
+      "image": ogURL,
+      "jobTitle": "Lead Multi-Asset Quantitative Analyst & Developer",
+      "worksFor": {
+        "@type": "Organization",
+        "name": "Absolute Labs"
+      },
+      "sameAs": [
+        "https://linkedin.com/in/mahlatsendala",
+        "https://github.com/alexndala"
+      ],
+      "email": "mailto:axndala@gmail.com",
+      "knowsAbout": [
+        "Quantitative Finance",
+        "Portfolio Construction",
+        "Monte Carlo Simulation",
+        "MCMC Optimization",
+        "Financial Data Engineering",
+        "Python",
+        "React",
+        "TypeScript",
+        "Regulatory Compliance"
+      ]
+    }, null, 2)} />
+    
+    <!-- Preconnect for performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" media="print" onload="this.media='all'" />
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+  </head>
+  <body class="min-h-screen flex flex-col">
+    <header class="sticky top-0 z-50 bg-bg/95 backdrop-blur-sm border-b border-border">
+      <nav class="container-custom" aria-label="Main navigation">
+        <div class="flex h-16 items-center justify-between">
+          <a href="/" class="font-bold text-xl text-text hover:text-primary transition-colors" aria-label="Mahlatse Ndala - Home">
+            MN
+          </a>
+          
+          <div class="hidden md:flex items-center gap-8">
+            <a href="/#about" class="text-sm font-medium text-text-secondary hover:text-primary transition-colors">About</a>
+            <a href="/experience" class="text-sm font-medium text-text-secondary hover:text-primary transition-colors">Experience</a>
+            <a href="/projects" class="text-sm font-medium text-text-secondary hover:text-primary transition-colors">Projects</a>
+            <a href="/skills" class="text-sm font-medium text-text-secondary hover:text-primary transition-colors">Skills</a>
+            <a href="/certifications" class="text-sm font-medium text-text-secondary hover:text-primary transition-colors">Certifications</a>
+            <a href="/education" class="text-sm font-medium text-text-secondary hover:text-primary transition-colors">Education</a>
+            <a href="/contact" class="btn-primary text-sm hidden sm:inline-flex">Get in Touch</a>
+          </div>
+          
+          <div class="flex items-center gap-4">
+            <button id="theme-toggle" class="p-2 rounded-lg bg-bg-secondary border border-border hover:bg-bg-tertiary transition-colors" aria-label="Toggle dark mode" title="Toggle theme">
+              <svg class="w-5 h-5 text-text-secondary dark-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+              </svg>
+              <svg class="w-5 h-5 text-text-secondary light-icon hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+              </svg>
+            </button>
+            
+            <button id="mobile-menu-btn" class="md:hidden p-2 rounded-lg bg-bg-secondary border border-border" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+              <svg class="w-6 h-6 text-text" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+              </svg>
+            </button>
+          </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="md:hidden overflow-hidden max-h-0 transition-all duration-300 ease-out bg-bg border-t border-border" role="navigation" aria-label="Mobile navigation">
+          <div class="py-4 space-y-2">
+            <a href="/#about" class="block px-4 py-2 text-sm font-medium text-text-secondary hover:text-primary hover:bg-bg-secondary rounded-lg transition-colors">About</a>
+            <a href="/experience" class="block px-4 py-2 text-sm font-medium text-text-secondary hover:text-primary hover:bg-bg-secondary rounded-lg transition-colors">Experience</a>
+            <a href="/projects" class="block px-4 py-2 text-sm font-medium text-text-secondary hover:text-primary hover:bg-bg-secondary rounded-lg transition-colors">Projects</a>
+            <a href="/skills" class="block px-4 py-2 text-sm font-medium text-text-secondary hover:text-primary hover:bg-bg-secondary rounded-lg transition-colors">Skills</a>
+            <a href="/certifications" class="block px-4 py-2 text-sm font-medium text-text-secondary hover:text-primary hover:bg-bg-secondary rounded-lg transition-colors">Certifications</a>
+            <a href="/education" class="block px-4 py-2 text-sm font-medium text-text-secondary hover:text-primary hover:bg-bg-secondary rounded-lg transition-colors">Education</a>
+            <a href="/contact" class="block px-4 py-2 text-sm font-medium text-primary hover:bg-primary/10 rounded-lg transition-colors">Get in Touch</a>
+          </div>
+        </div>
+      </nav>
+    </header>
+    
+    <main class="flex-1" id="main-content">
+      <slot />
+    </main>
+    
+    <footer class="bg-bg-secondary border-t border-border py-12">
+      <div class="container-custom">
+        <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+          <div class="text-center md:text-left">
+            <p class="font-bold text-lg text-text">Mahlatse Ndala</p>
+            <p class="text-sm text-text-secondary mt-1">Lead Multi-Asset Quantitative Analyst & Developer</p>
+          </div>
+          
+          <div class="flex items-center gap-6">
+            <a href="mailto:axndala@gmail.com" class="text-sm text-text-secondary hover:text-primary transition-colors" aria-label="Email">axndala@gmail.com</a>
+            <a href="https://linkedin.com/in/mahlatsendala" target="_blank" rel="noopener noreferrer" class="text-sm text-text-secondary hover:text-primary transition-colors" aria-label="LinkedIn">LinkedIn</a>
+            <a href="https://github.com/alexndala" target="_blank" rel="noopener noreferrer" class="text-sm text-text-secondary hover:text-primary transition-colors" aria-label="GitHub">GitHub</a>
+          </div>
+          
+          <div class="text-center md:text-right">
+            <p class="text-xs text-text-muted">&copy; {new Date().getFullYear()} Mahlatse Ndala. Built with Astro & Tailwind.</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+    
+    <script>
+      // Theme toggle
+      const themeToggle = document.getElementById('theme-toggle');
+      const html = document.documentElement;
+      const darkIcons = themeToggle.querySelectorAll('.dark-icon');
+      const lightIcons = themeToggle.querySelectorAll('.light-icon');
+      
+      function updateIcons(isDark) {
+        darkIcons.forEach(el => el.classList.toggle('hidden', !isDark));
+        lightIcons.forEach(el => el.classList.toggle('hidden', isDark));
+      }
+      
+      // Initialize
+      const savedTheme = localStorage.getItem('theme');
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const isDark = savedTheme ? savedTheme === 'dark' : prefersDark;
+      html.classList.toggle('light', !isDark);
+      updateIcons(isDark);
+      
+      themeToggle.addEventListener('click', () => {
+        const newIsDark = !html.classList.contains('light');
+        html.classList.toggle('light', !newIsDark);
+        localStorage.setItem('theme', newIsDark ? 'dark' : 'light');
+        updateIcons(newIsDark);
+      });
+      
+      // Mobile menu
+      const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+      const mobileMenu = document.getElementById('mobile-menu');
+      
+      mobileMenuBtn.addEventListener('click', () => {
+        const isOpen = mobileMenu.classList.contains('max-h-0');
+        mobileMenu.style.maxHeight = isOpen ? mobileMenu.scrollHeight + 'px' : '0';
+        mobileMenu.classList.toggle('max-h-0', !isOpen);
+        mobileMenu.classList.toggle('opacity-0', !isOpen);
+        mobileMenuBtn.setAttribute('aria-expanded', isOpen);
+      });
+      
+      // Close mobile menu on link click
+      mobileMenu.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+          mobileMenu.style.maxHeight = '0';
+          mobileMenu.classList.add('max-h-0', 'opacity-0');
+          mobileMenuBtn.setAttribute('aria-expanded', 'false');
+        });
+      });
+    </script>
+    
+    <style is:global>
+      @media (prefers-reduced-motion: reduce) {
+        *, *::before, *::after {
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+          transition-duration: 0.01ms !important;
+        }
+      }
+    </style>
+  </body>
+</html>

@@ -1,0 +1,110 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { personal } from '../data/personal';
+import { certifications, certificationsByCategory } from '../data/certifications';
+import CertCard from '../components/CertCard.astro';
+---
+
+<Layout title="Certifications | Mahlatse Ndala" description="Professional certifications across cloud, AI, finance, data, and software engineering">
+  <main id="main-content">
+    <section class="section pt-32" aria-labelledby="certifications-heading">
+      <div class="container-custom">
+        <header class="mb-12 max-w-3xl">
+          <h1 id="certifications-heading" class="section-title">Certifications & Credentials</h1>
+          <p class="section-subtext mt-4">Continuous learning across cloud, AI, quantitative finance, data, and software engineering</p>
+        </header>
+        
+        <!-- Stats -->
+        <div class="grid sm:grid-cols-3 lg:grid-cols-5 gap-4 mb-12 max-w-4xl">
+          <div class="card text-center">
+            <div class="text-3xl font-bold text-primary mb-1">{certifications.length}</div>
+            <div class="text-text-secondary">Total Certifications</div>
+          </div>
+          <div class="card text-center">
+            <div class="text-3xl font-bold text-accent mb-1">{certifications.filter(c => c.category === 'Cloud/AWS').length}</div>
+            <div class="text-text-secondary">Cloud & AWS</div>
+          </div>
+          <div class="card text-center">
+            <div class="text-3xl font-bold text-green-600 mb-1">{certifications.filter(c => c.category === 'AI/ML').length}</div>
+            <div class="text-text-secondary">AI & Machine Learning</div>
+          </div>
+          <div class="card text-center">
+            <div class="text-3xl font-bold text-blue-600 mb-1">{certifications.filter(c => c.category === 'Finance/Quant').length}</div>
+            <div class="text-text-secondary">Finance & Quant</div>
+          </div>
+          <div class="card text-center">
+            <div class="text-3xl font-bold text-purple-600 mb-1">{certifications.filter(c => c.category === 'Data').length}</div>
+            <div class="text-text-secondary">Data & Analytics</div>
+          </div>
+        </div>
+        
+        <!-- Certifications by Category -->
+        <div class="max-w-5xl space-y-16">
+          {Object.entries(certificationsByCategory).map(([category, certs]) => (
+            <section aria-labelledby={`cat-${category.toLowerCase().replace(/\//g, '-')}`}>
+              <header class="mb-8">
+                <h2 id={`cat-${category.toLowerCase().replace(/\//g, '-')}`} class="text-2xl font-bold text-text flex items-center gap-3">
+                  <span class="text-primary">{category === 'Cloud/AWS' && '☁️' || category === 'AI/ML' && '🤖' || category === 'Finance/Quant' && '📈' || category === 'Data' && '📊' || category === 'Software Engineering' && '💻' || category === 'Professional' && '🎓' || category === 'Blockchain' && '⛓️'}</span>
+                  {category}
+                </h2>
+                <p class="text-text-secondary mt-1">{certs.length} certification{certs.length !== 1 ? 's' : ''}</p>
+              </header>
+              
+              <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {certs.map((cert) => (
+                  <CertCard cert={cert} />
+                ))}
+              </div>
+            </section>
+          ))}
+        </div>
+        
+        <!-- In Progress -->
+        <section class="mt-16" aria-labelledby="in-progress-heading">
+          <header class="mb-8">
+            <h2 id="in-progress-heading" class="text-2xl font-bold text-text flex items-center gap-3">
+              <span>🚧</span>
+              In Progress
+            </h2>
+            <p class="text-text-secondary mt-1">Currently pursuing</p>
+          </header>
+          
+          <div class="grid md:grid-cols-2 gap-6">
+            <div class="card">
+              <div class="flex items-start gap-4">
+                <div class="w-12 h-12 rounded-xl bg-blue-100 flex items-center justify-center text-2xl">☁️</div>
+                <div>
+                  <h3 class="font-semibold text-text">AWS Certified AI Practitioner (AIF-C01)</h3>
+                  <p class="text-text-secondary text-sm mt-1">Amazon Web Services (AWS) — Exam Prep Standard Course completed May 2025</p>
+                  <div class="flex flex-wrap gap-2 mt-3">
+                    <span class="skill-tag text-xs">AI/ML</span>
+                    <span class="skill-tag text-xs">GenAI</span>
+                    <span class="skill-tag text-xs">AWS Bedrock</span>
+                    <span class="skill-tag text-xs">AWS SageMaker</span>
+                    <span class="skill-tag text-xs">MLOps</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="card">
+              <div class="flex items-start gap-4">
+                <div class="w-12 h-12 rounded-xl bg-purple-100 flex items-center justify-center text-2xl">📚</div>
+                <div>
+                  <h3 class="font-semibold text-text">MSc Financial Engineering</h3>
+                  <p class="text-text-secondary text-sm mt-1">WorldQuant University — Expected 2026</p>
+                  <div class="flex flex-wrap gap-2 mt-3">
+                    <span class="skill-tag text-xs">Stochastic Calculus</span>
+                    <span class="skill-tag text-xs">Advanced Derivatives</span>
+                    <span class="skill-tag text-xs">Risk Management</span>
+                    <span class="skill-tag text-xs">Quant Research</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </section>
+  </main>
+</Layout>
